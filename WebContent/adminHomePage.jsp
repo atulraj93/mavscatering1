@@ -15,7 +15,8 @@
 
       <div class="menu_nav">
         <ul>
-          <li><a href="<c:url value='/searchUser.jsp' />"><span>Search for User</span></a></li>  
+          <li><a href="<c:url value='/searchUser.jsp' />"><span>Search for User</span></a></li>
+          <li><a href="<c:url value='/userController?action=viewProfile' />"><span>View/Modify My Profile</span></a></li>  
         </ul>
       </div>
     </div>

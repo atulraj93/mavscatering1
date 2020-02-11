@@ -175,7 +175,7 @@ public class User implements Serializable{
 
 	public String validateutaid(String utaid) {
 		String error = "";
-		
+		ArrayList<String> ids = UserDAO.getUTAId();
 		//System.out.println("In validate fname");
 		if(utaid.isEmpty())
 			error = "UTA ID can not be blank.";
@@ -183,6 +183,8 @@ public class User implements Serializable{
 				error = "UTA Id must be numeric";
 		else if(utaid.length() != 10)
 			error = "UTA Id must have a length of 10";
+		else if(ids.contains(utaid))
+			error = "There can only be one account per UTA ID.";
 		return error;
 	}
 

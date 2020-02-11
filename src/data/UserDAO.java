@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 import model.User;
 import util.SQLConnection;
@@ -146,7 +146,7 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 	}
 	
 	public static ArrayList<User>  searchUsers(String userlastname)  {  
-		return ReturnMatchingUsersList(" SELECT * from user WHERE lastname LIKE '%"+userlastname+"%' ORDER BY lastname");
+		return ReturnMatchingUsersList(" SELECT * from user WHERE lastname LIKE '%"+userlastname+"%' ORDER BY lastname,firstname,role");
 	}
 	
 	public static ArrayList<User>   searchUser (String username)  {  
@@ -179,9 +179,25 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 			while(roleList.next()) {
 				roles.add(roleList.getString("role"));
 			}
-			conn.close();
+			//conn.close();
 		}catch(SQLException e) {}
 		return roles;
+	}
+	
+	public static ArrayList<String> getUTAId(){
+		ArrayList<String> ids = new ArrayList<String>();
+		Statement stmt = null;
+		String sql = "select utaid from user;";
+		Connection conn = SQLConnection.getDBConnection();
+		try {
+			stmt = conn.createStatement();
+			ResultSet idList = stmt.executeQuery(sql);
+			while(idList.next()) {
+				ids.add(idList.getString("utaid"));
+			}
+			//conn.close();
+		}catch(SQLException e) {}
+		return ids;
 	}
 	
 	public static void modifyUser(String username, String role) {

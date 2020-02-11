@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
 		// TODO Auto-generated method stub
 				//doGet(request, response);
 				HttpSession session = request.getSession();	
-				String action = request.getParameter("action");
+				//String action = request.getParameter("action");
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");	
 				
@@ -68,6 +68,8 @@ public class LoginController extends HttpServlet {
 						user = UserDAO.getUser(username);				
 						
 						currentSession.setAttribute("currentUser",user);
+						user.setUsername(username);
+						//currentSession.setAttribute("username", username);
 						
 						//redirect to appropriate home page based on role
 						String role = user.getRole();
@@ -80,6 +82,8 @@ public class LoginController extends HttpServlet {
 						  url = "/UserHome.jsp";
 						else
 						  url = "/facilityManagerHome.jsp";
+						
+						//request.
 
 					}
 					else {

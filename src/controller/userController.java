@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+//import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,6 +67,7 @@ public class userController extends HttpServlet {
 		
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
+		System.out.println(session.getAttributeNames());
 		User user = new User();
 		UserErrorMsgs uerrorMsgs = new UserErrorMsgs();
 		session.removeAttribute("errorMsgs");
@@ -135,6 +137,14 @@ public class userController extends HttpServlet {
 			session.removeAttribute("User");
 			url="/userSearchResults.jsp";
 		}
+		else if(action.equalsIgnoreCase("viewProfile")) {
+			User user1 = (User)session.getAttribute("currentUser");
+			System.out.println("Current User : "+user1.getUsername());
+			User userProfile = UserDAO.getUser(user1.getUsername());
+			session.setAttribute("USER", userProfile);
+			url="/viewMyProfile.jsp";
+		}
+
 		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 
