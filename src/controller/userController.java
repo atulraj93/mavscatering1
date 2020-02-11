@@ -144,6 +144,13 @@ public class userController extends HttpServlet {
 			session.setAttribute("USER", userProfile);
 			url="/viewMyProfile.jsp";
 		}
+		else if(action.equalsIgnoreCase("logout")) {
+			if(session != null)
+			    session.invalidate();
+			//request.getRequestDispatcher("/login.jsp").forward(request,response);
+			url="/login.jsp";
+		}
+
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}

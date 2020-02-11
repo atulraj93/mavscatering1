@@ -7,6 +7,7 @@
 </head>
     <div class="header_resize">
       <div class="logo"><h1><a href="<c:url value='/userSearchResults.jsp' />">Catering Management Application</a></h1></div>
+      <a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
       <div class="menu_nav">
       </div>
   </div>

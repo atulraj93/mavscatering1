@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +7,7 @@
 </head>
 <body>
 <div class="logo"><h1><a href="<c:url value='/adminHomePage.jsp' />">Mavs Catering System</a></h1></div>
+<a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
 <h2>Modify User Profile</h2>
 <input name="errMsg"  value="<c:out value='${errorMsgs.errorMsgs}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <table>

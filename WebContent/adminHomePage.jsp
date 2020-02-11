@@ -11,8 +11,9 @@
     <div class="header_resize">
 
       <div class="logo"><h1><a href="<c:url value='/' />">Catering Management Application</a></h1></div>
+      <a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
   <div class="content">  
-
+		
       <div class="menu_nav">
         <ul>
           <li><a href="<c:url value='/searchUser.jsp' />"><span>Search for User</span></a></li>

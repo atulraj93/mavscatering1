@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class User implements Serializable{
@@ -119,6 +120,29 @@ public class User implements Serializable{
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+
+	public static boolean isStringOnlyAlphabet(String str) 
+	{ 
+	    for (int i = 0; i < str.length(); i++) { 
+	        char ch = str.charAt(i); 
+	        if ((!(ch >= 'A' && ch <= 'Z')) 
+	            && (!(ch >= 'a' && ch <= 'z'))) { 
+	            return false; 
+	        } 
+	    } 
+	    return true; 
+	}
+	
+	public static boolean isStringOnlyNumber(String str) 
+	{ 
+	    for (int i = 0; i < str.length(); i++) { 
+	        char ch = str.charAt(i); 
+	        if ((!(ch >= '0' && ch <= '9'))) { 
+	            return false; 
+	        } 
+	    } 
+	    return true; 
+	}
 	
 	public void validateUser(String action, User user,UserErrorMsgs errorMsgs) {
 		if(action.equals("searchUser")) {
@@ -137,6 +161,7 @@ public class User implements Serializable{
 			errorMsgs.setCityError(validatecity(user.getCity()));
 			errorMsgs.setStateError(validatestate(user.getState()));
 			errorMsgs.setRoleError(validateRole(user.getRole()));
+			errorMsgs.setPasswordError(validatePassword(user.getPassword()));
 		}
 		else if(action.equals("modifyUserProfile")) {
 			errorMsgs.setRoleError(validateRole(user.getRole()));
@@ -153,7 +178,7 @@ public class User implements Serializable{
 				error = "First name must start with a capital letter";
 		else if(firstname.length() <= 2 || firstname.length() >= 30)
 			error = "First name length must be >2 and <30";
-		else if(!firstname.matches("[a-zA-Z]+"))
+		else if(!isStringOnlyAlphabet(firstname))
 			error = "First name cannot contain a number or special characters";
 		return error;
 	}
@@ -168,7 +193,7 @@ public class User implements Serializable{
 				error = "Last name must start with a capital letter";
 		else if(lastname.length() <= 2 || lastname.length() >= 30)
 			error = "Last name length must be >2 and <30";
-		else if(!lastname.matches("[a-zA-Z]+"))
+		else if(!isStringOnlyAlphabet(lastname))
 			error = "Last name cannot contain a number or special characters";
 		return error;
 	}
@@ -179,7 +204,7 @@ public class User implements Serializable{
 		//System.out.println("In validate fname");
 		if(utaid.isEmpty())
 			error = "UTA ID can not be blank.";
-		else if(!utaid.matches("[0-9]+"))
+		else if(!isStringOnlyNumber(utaid))
 				error = "UTA Id must be numeric";
 		else if(utaid.length() != 10)
 			error = "UTA Id must have a length of 10";
@@ -198,8 +223,23 @@ public class User implements Serializable{
 				error = "Username must start with letter";
 		else if(username.length() <= 4 || username.length() >= 21)
 			error = "Username length must be >4 and <21";
-		else if(!username.matches("[a-zA-Z0-9]+"))
+		else if(!(isStringOnlyNumber(username) || !isStringOnlyAlphabet(username)))
 			error = "Username cannot contain special characters.";
+		return error;
+	}
+	
+	public String validatePassword(String password) {
+		String error = "";
+		if(!password.matches(".*[A-Z].*"))
+			error = "Password must contain an uppercase letter.";
+		else if(!password.matches(".*[a-z].*"))
+			error = "Password must contain an lowercase letter";
+		else if(!password.matches(".*[0-9].*"))
+			error = "Password must contain a number.";
+		else if(!password.matches(".*[`~!@#$%^&*()\\\\-_=+\\\\\\\\|\\\\[{\\\\]};:'\\\",<.>/?].*"))
+			error = "Password must contain a special character.";
+		else if(!(password.length() > 7 && password.length() < 30))
+			error = "Password length must be >7 and <30";
 		return error;
 	}
 
@@ -209,7 +249,7 @@ public class User implements Serializable{
 		
 		//System.out.println("In validate phone");
 		if(!phone.isEmpty()) {
-			if(!phone.matches("[0-9]+"))
+			if(!isStringOnlyNumber(phone))
 				error = "Phone number must be numeric";
 			else if(phone.length() != 10)
 				error = "Phone number must have 10 digits";
@@ -224,7 +264,7 @@ public class User implements Serializable{
 		if(!streetnumber.isEmpty()) {
 			if(!(streetnumber.length() < 7 && streetnumber.length() > 0))
 				error = "Street number length must be >0 and <7.";
-			else if(!streetnumber.matches("[0-9]+"))
+			else if(!isStringOnlyNumber(streetnumber))
 				error = "Street number must be numeric";
 		}
 		return error;
@@ -238,7 +278,7 @@ public class User implements Serializable{
 		if(!streetname.isEmpty()) {
 			if(!(streetname.length() > 0 && streetname.length() < 40))
 				error = "Street number length must be >0 and <40.";
-			else if(!streetname.matches("[a-zA-Z]+"))
+			else if(!isStringOnlyAlphabet(streetname))
 				error = "Street number must be non-numeric";
 		}
 		return error;
@@ -249,7 +289,7 @@ public class User implements Serializable{
 		String error = "";
 		//System.out.println("In validate zipcode");
 		if(!zipcode.isEmpty()) {
-			if(!zipcode.matches("[0-9]+"))
+			if(!isStringOnlyNumber(zipcode))
 				error = "Zipcode must be numeric";
 			else if(zipcode.length() != 5)
 				error = "Zipcode must have a length of 5";
@@ -266,7 +306,7 @@ public class User implements Serializable{
 					error = "City must start with a capital letter";
 			else if(city.length() <= 2 || city.length() >= 30)
 				error = "City length must be >2 and <30";
-			else if(!city.matches("[a-zA-Z]+"))
+			else if(!isStringOnlyAlphabet(city))
 				error = "City cannot contain a number or special characters";
 			
 		}
@@ -279,7 +319,7 @@ public class User implements Serializable{
 				"MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY" };
 		List<String> list = Arrays.asList(states);
 		if(!state.isEmpty()) {
-			if(!state.matches("[a-zA-Z]+"))
+			if(!isStringOnlyAlphabet(state))
 				error = "State must be non numeric.";
 			else if(state.length() != 2)
 				error = "State must be 2 letter abbreviation.";
