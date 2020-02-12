@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import data.UserDAO;
 import model.User;
+import model.Event;
 import model.UserErrorMsgs;
+import model.EventErrorMsgs;
+import data.EventDAO;
 
 /**
  * Servlet implementation class userController
@@ -150,6 +153,35 @@ public class userController extends HttpServlet {
 			//request.getRequestDispatcher("/login.jsp").forward(request,response);
 			url="/login.jsp";
 		}
+		else if(action.equalsIgnoreCase("bookEvent") ) {
+			if (request.getParameter("NextBtn")!=null) 
+			{
+				Event event = new Event();
+				User user1 = (User)session.getAttribute("currentUser");
+				String selectedDate = request.getParameter("iddate");
+				String selectedTime = request.getParameter("idtime");
+				EventErrorMsgs EerrorMsgs = new EventErrorMsgs();
+				event.validateSelectedDateTime(selectedDate, selectedTime, EerrorMsgs);
+				session.setAttribute("TIMEERROR", EerrorMsgs);
+				if (EerrorMsgs.getErrorMsg().equals("")) {
+					session.removeAttribute("errorMsgs");
+					String firstname = EventDAO.getfirstname(user1.getUsername());
+					String lastname = EventDAO.getlastname(user1.getUsername());
+					session.setAttribute("fname", firstname);
+					session.setAttribute("lname", lastname);
+					session.setAttribute("date", selectedDate);
+					session.setAttribute("time", selectedTime);
+					
+					url = "/EventBook.jsp";
+				}
+				else {
+					url = "/EventRequest.jsp";
+				}
+
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+				
+				}
+			}
 
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);
