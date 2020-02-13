@@ -9,6 +9,7 @@ public class EventErrorMsgs {
 	private String invalidExpDate;
 	private String timeerror;
 	private String capacityError;
+	private String staffError;
 	
 	public EventErrorMsgs () {
 		this.errorMsg="";
@@ -17,7 +18,8 @@ public class EventErrorMsgs {
 		this.invalidCVVNum="";
 		this.invalidExpDate = "";
 		this.timeerror = "";
-		this.capacityError="";
+		this.setCapacityError("");
+		this.setStaffError("");
 	}
 	
 	public String getErrorMsg() {
@@ -29,7 +31,7 @@ public class EventErrorMsgs {
 				||!invalidCVVNum.equals("")
 				||!invalidExpDate.equals("")
 				||!timeerror.equals("")
-				)
+				||!staffError.equals(""))
 		  errorMsg="Please correct the following errors";
 	}
 	
@@ -71,6 +73,22 @@ public class EventErrorMsgs {
 
 	public void settimeerror(String timeerror) {
 		this.timeerror = timeerror;
+	}
+
+	public String getCapacityError() {
+		return capacityError;
+	}
+
+	public void setCapacityError(String capacityError) {
+		this.capacityError = capacityError;
+	}
+
+	public String getStaffError() {
+		return staffError;
+	}
+
+	public void setStaffError(String staffError) {
+		this.staffError = staffError;
 	}
 	
 

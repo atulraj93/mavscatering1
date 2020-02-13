@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 //import java.text.SimpleDateFormat;
 //import java.util.Calendar;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,6 +49,8 @@ public class eventController extends HttpServlet {
             url  ="/PayDeposit.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
+		else
+			doPost(request,response);
 	}
 
 	/**
@@ -150,6 +153,66 @@ public class eventController extends HttpServlet {
         	}
         	url = "/PayDeposit.jsp";
         }
+		else if(action.equalsIgnoreCase("eventsummary")) {
+			System.out.print("printttt");
+	
+			ArrayList<Event> eventlist = EventDAO.getEventSummary();     
+			session.setAttribute("Event", eventlist);		
+			
+			url="/eventsummary.jsp";
+						
+			
+		}
+		else if(action.equalsIgnoreCase("goassignStaff")) {
+			url="/assignstaff.jsp";
+			session.setAttribute("eid", request.getParameter("id"));
+		}
+		else if(action.equalsIgnoreCase("assignStaff")) {
+			System.out.print("In assign staff");
+			event.seteventID((String)session.getAttribute("eid"));
+			EventErrorMsgs EerrorMsgs = new EventErrorMsgs();
+			session.setAttribute("errorMsgs", EerrorMsgs);
+			EerrorMsgs.setStaffError(User.validateStaff(request.getParameter("firstname"), request.getParameter("lastname")));
+			EerrorMsgs.setErrorMsg();
+			if(EerrorMsgs.getErrorMsg().equals("")) {
+				event.setStaff_fname(request.getParameter("firstname"));
+				event.setStaff_lname(request.getParameter("lastname"));
+				EventDAO.Modifyevent(event);
+				url="/eventsummary.jsp";
+			}
+			else {
+				url="/assignstaff.jsp";
+			}
+			
+		}
+		else if (action.equalsIgnoreCase("EventDetails")) {
+		Event eventInDB2 = new Event();
+		System.out.println("ID "+request.getParameter("id"));
+		session.setAttribute("eid1", request.getParameter("id"));
+		eventInDB2 = EventDAO.getSpecificEvent(session.getAttribute("eid1").toString());
+		session.setAttribute("EVENTS", eventInDB2);
+		url="/EventDetails.jsp";					
+		}
+		else
+		if (action.equalsIgnoreCase("getDate")) {
+			System.out.println("Hello");
+			String date = (String) request.getParameter("iddate");
+			String time = (String) request.getParameter("idtime");
+			session.setAttribute("Date", date);
+			session.setAttribute("Time", time);
+			url="/eventController?action=ViewAssignedEvents&id1="+date+"&id2="+time;
+		}
+		else
+		if (action.equalsIgnoreCase("ViewAssignedEvents")) {
+			ArrayList<Event> eventInDB = new ArrayList<Event>();
+			String date = (String) session.getAttribute("Date");
+			String time = (String) session.getAttribute("Time");
+			eventInDB=EventDAO.listEvents1(date,time);
+			session.setAttribute("EVENTS", eventInDB);				
+			url="/ViewAssignedEvents.jsp";
+		}
+
+
 		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 	

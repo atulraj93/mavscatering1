@@ -161,6 +161,7 @@ public class User implements Serializable{
 			errorMsgs.setStateError(validatestate(user.getState()));
 			errorMsgs.setRoleError(validateRole(user.getRole()));
 			errorMsgs.setPasswordError(validatePassword(user.getPassword()));
+			errorMsgs.setEmailError(validateEmail(user.getEmail()));
 		}
 		else if(action.equals("modifyUserProfile")) {
 			errorMsgs.setRoleError(validateRole(user.getRole()));
@@ -241,6 +242,21 @@ public class User implements Serializable{
 			error = "Password length must be >7 and <30";
 		return error;
 	}
+	
+	public String validateEmail(String email) {
+		String error = "";
+		String[] domains = {".org",".edu",".com",".net",".gov",".mil"};
+		List<String> domains1 = Arrays.asList(domains);
+		String domain = email.substring(email.length() - 4);
+		System.out.println("Domain : "+domain);
+		if(!domains1.contains(domain))
+			error = "Invalid domain name.";
+		else if(!email.contains("@"))
+			error = "Email address needs to contain @.";
+		else if(!(email.length() >= 7 && email.length() <= 45))
+			error = "Email address must be between 7 and 45 characters long.";
+		return error;
+	}
 
 	public String validatePhone(String phone) {
 
@@ -307,7 +323,6 @@ public class User implements Serializable{
 				error = "City length must be >2 and <30";
 			else if(!isStringOnlyAlphabet(city))
 				error = "City cannot contain a number or special characters";
-			
 		}
 		return error;
 	}
@@ -337,6 +352,13 @@ public class User implements Serializable{
 			error = "There can only be one admin";
 		else if(Role.equals("Caterer Manager") && roles.contains("Caterer Manager"))
 			error = "There can only be one Caterer Manager";
+		return error;
+	}
+	
+	public static String validateStaff(String staff_fname,String staff_lname) {
+		String error = "";
+		if(!UserDAO.getStaff(staff_fname, staff_lname))
+			error = "Staff named "+staff_fname+" "+staff_lname+" does not exist.";
 		return error;
 	}
 	

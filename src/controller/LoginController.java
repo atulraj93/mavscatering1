@@ -76,12 +76,12 @@ public class LoginController extends HttpServlet {
 						System.out.println("Login:" + role);
 						if(role.equals("Admin"))
 						  url = "/adminHomePage.jsp"; 
-						else if(role.equals("Repairer"))
-						  url = "/repairerHome.jsp";
+						else if(role.equals("Caterer Staff"))
+						  url = "/HomePage.jsp";
 						else if(role.equals("User"))
 						  url = "/UserHome.jsp";
 						else
-						  url = "/facilityManagerHome.jsp";
+						  url = "/ManagerHome.jsp";
 						
 						//request.
 

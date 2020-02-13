@@ -33,7 +33,6 @@
 			<td class="myTable30 "><c:out value="${item.role}" /></td>
             <td> <a href="<c:url value='/userController?action=listSpecificUser&id=${item.username}' />">View</a></td>
             <td> <a href="<c:url value='/userController?action=listSpecificUser&id=${item.username}'/>">Modify Profile</a></td>
-            <td> <a href="<c:url value='/userController?action=deleteSpecificUser&id=${item.username}' />">Delete</a></td>
 			</tr>
 		</c:forEach>
  </table>

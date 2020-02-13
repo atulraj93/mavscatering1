@@ -31,6 +31,8 @@ public class Event implements Serializable{
 	private String ccexpdate;
 	private String userid;
 	private String depositAmount;
+	private String staff_fname;
+	private String staff_lname;
 	
 	public void setEvent(String lastName,String firstName, String date,String startTime,String duration,String hallName,String estAttendees,
 			String eventName, String foodType,String meal, String mealFormality, String drinkType, String entertainmentItems,String eventStatus, String eventID,
@@ -430,6 +432,22 @@ public class Event implements Serializable{
 
 	public void setDepositAmount(String depositAmount) {
 		this.depositAmount = depositAmount;
+	}
+
+	public String getStaff_fname() {
+		return staff_fname;
+	}
+
+	public void setStaff_fname(String staff_fname) {
+		this.staff_fname = staff_fname;
+	}
+
+	public String getStaff_lname() {
+		return staff_lname;
+	}
+
+	public void setStaff_lname(String staff_lname) {
+		this.staff_lname = staff_lname;
 	}
 
 

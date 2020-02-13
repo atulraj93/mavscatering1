@@ -225,4 +225,23 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 		}
 		
 	}
+	
+	
+	public static boolean getStaff(String fname,String lname){
+		boolean staff = false;
+		Statement stmt = null;
+		String sql = "select firstname,lastname from user where role = 'Caterer Staff' and firstname = '"+fname+"' and lastname = '"+lname+"';";
+		Connection conn = SQLConnection.getDBConnection();
+		try {
+			stmt = conn.createStatement();
+			ResultSet List = stmt.executeQuery(sql);
+			if(List.next())	{
+				staff = true;}
+			else
+				staff = false;
+			//conn.close();
+		}catch(SQLException e) {}
+		return staff;
+	}
+
 }	
