@@ -33,7 +33,7 @@ public static void registerEvent(Event event) {
 			+ event.geteventStatuss()+ "','"
 			+ event.getuserid()+ "','"
 			+ event.getccnumber()+ "','"
-			+ event.getccsecuritycode()+ "','"
+			+ event.getccpin()+ "','"
 			+ event.getccexpdate()+ "','"
 			+ event.getDepositAmount()+ "')";
 	System.out.println("Query: "+registerUser);
@@ -102,7 +102,7 @@ public static ArrayList<Event> listEvents() {
 public static void UpdateRequest(String userid, String date, String time, String hallname, String ccnum, String cvvnum, String expdate, String depositAmount) {
 	Statement stmt = null;
 	Connection conn = SQLConnection.getDBConnection();
-	String Status = "Reservered";
+	String Status = "Reserved";
 	try
 	{
 		stmt = conn.createStatement();
@@ -130,8 +130,9 @@ public static int CheckReservations(String date, String time, String hallname) {
 		stmt = conn.createStatement();
 		conn.setAutoCommit(false);
 		String reservations = "select count(*) as count from eventdetails "
-				+ "WHERE date = '"+date+"' and startTime = '"+time+"' and hallName = '"+hallname+"'";
-		System.out.println(reservations);
+				+ "WHERE Time_to_sec('"+time+"') between Time_to_sec(startTime)"
+						+ " and (Time_to_Sec(concat(duration,':00'))  +  Time_to_sec(startTime)) and date = '"+date+"'"
+						+ " and eventStatus = 'Reserved' and hallName = '"+hallname+"'";
 		ResultSet Result = stmt.executeQuery(reservations);	
 		while(Result.next()) {count = Result.getString("count");}
 		
@@ -218,12 +219,12 @@ public static Event getSpecificEvent(String eventID) {
 			String eventStatus  = eventList.getString("eventStatus");
 			String EventID  = eventList.getString("eventID");
 			String ccNumber = eventList.getString("ccnum");
-			String ccsecuritycode = eventList.getString("cvvnum");
+			String ccpin = eventList.getString("cvvnum");
 			String ccexpdate = eventList.getString("expdate");
 			String userid = eventList.getString("userid");
 			String depositAmount = eventList.getString("depositAmount");
 			event.setEvent(lastName, firstName, date, startTime, duration, hallName, estAttendees, eventName, foodType, meal, mealFormality, drinkType, 
-					entertainmentItems, eventStatus, EventID, ccNumber, ccsecuritycode, ccexpdate, userid,depositAmount);
+					entertainmentItems, eventStatus, EventID, ccNumber, ccpin, ccexpdate, userid,depositAmount);
 		}
 		
 		} catch (SQLException e) {
@@ -246,7 +247,7 @@ public static ArrayList<Event> getEventSummary() {
 	try {   
 		conn = SQLConnection.getDBConnection();  
 		stmt = conn.createStatement();
-		String searchSpecificEvent = " SELECT * from eventdetails;";
+		String searchSpecificEvent = " SELECT * from eventdetails order by date,startTime;";
 		ResultSet eventList = stmt.executeQuery(searchSpecificEvent);
 		while(eventList.next()) {
 			Event event= new Event();
@@ -311,7 +312,7 @@ public static void Modifyevent (Event event) {
 }
 public static ArrayList<Event>  listEvents1(String edate, String etime) {  
 	
-	return ReturnMatchingEventList(" SELECT eventname, date, starttime, duration, hallname, lastname, firstname, eventID,eventStatus from eventdetails where date_format(date(concat(date,' ',starttime)), '%m-%d-%Y %H:%i') >= date_format(date(concat('"+edate+"',' ','"+etime+"')), '%m-%d-%Y %H:%i')");
+	return ReturnMatchingEventList(" SELECT eventname, date, starttime, duration, hallname, lastname, firstname, eventID,eventStatus from eventdetails where date_format(date(concat(date,' ',starttime)), '%m-%d-%Y %H:%i') >= date_format(date(concat('"+edate+"',' ','"+etime+"')), '%m-%d-%Y %H:%i') order by date,startTime");
 }
 private static ArrayList<Event> ReturnMatchingEventList (String queryString) {
 	ArrayList<Event> eventListInDB = new ArrayList<Event>();

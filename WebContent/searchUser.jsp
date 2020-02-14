@@ -21,7 +21,7 @@
 	<tr>
   	<td> User's Lastname: </td>
  	<td> <input name="lastname" value="<c:out value='${User.lastname}'/>" class="text45">  </td>
-  	<td> <input name="lastNameError"  value="<c:out value='${errorMsgs.lastNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
+  	<td> <input name="lastNameError"  value="<c:out value='${errorMsgs.lastNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" > </td>
 	</tr>
 </table>
   <input type="submit" value="Submit">

@@ -13,8 +13,7 @@
 <h1>Manager Home page</h1>
   <ul>
   	<li><a href="<c:url value='/eventController?action=eventsummary' />">View Caterer Event Summary</a></li>
-  	
-    <li><a href="">Logout</a></li>
+  	<li><a href="<c:url value='/eventController?action=eventsummary' />">Update Profile</a></li>
   </ul>
 </body>
 </html>

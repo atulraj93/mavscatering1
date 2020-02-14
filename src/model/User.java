@@ -166,6 +166,10 @@ public class User implements Serializable{
 		else if(action.equals("modifyUserProfile")) {
 			errorMsgs.setRoleError(validateRole(user.getRole()));
 		}
+		else if(action.equals("login")) {
+			errorMsgs.setUsernameError(validateusername(user.getUsername()));
+			errorMsgs.setPasswordError(validatePassword(user.getPassword()));
+		}
 	}
 	
 	public String validateFirstname(String firstname) {
@@ -247,6 +251,7 @@ public class User implements Serializable{
 		String error = "";
 		String[] domains = {".org",".edu",".com",".net",".gov",".mil"};
 		List<String> domains1 = Arrays.asList(domains);
+		if(!email.isEmpty()) {
 		String domain = email.substring(email.length() - 4);
 		System.out.println("Domain : "+domain);
 		if(!domains1.contains(domain))
@@ -255,6 +260,9 @@ public class User implements Serializable{
 			error = "Email address needs to contain @.";
 		else if(!(email.length() >= 7 && email.length() <= 45))
 			error = "Email address must be between 7 and 45 characters long.";
+		}else {
+			error = "Email address cannot be empty";
+		}
 		return error;
 	}
 

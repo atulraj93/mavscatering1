@@ -16,7 +16,14 @@
     </header>
     <table class="center">
     <tr>
-				<td><a href="EventRequest.jsp" target="_top" style="margin-left: 118px;"> Request an event </a></td></tr>
+				<td><a href="<c:url value='/userController?action=EventRequest' />" target="_top" style="margin-left: 118px;"> Request an event </a></td>
+    </tr>
+     <tr>
+				<td><a href="/userController?action=EventRequest" target="_top" style="margin-left: 118px;"> View my Event Summary </a></td>
+    </tr>
+    <tr>
+				<td><a href="/userController?action=EventRequest" target="_top" style="margin-left: 118px;"> Update Profile</a></td>
+    </tr>
     </table>
 </body>
 </html>

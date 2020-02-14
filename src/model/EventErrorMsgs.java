@@ -5,21 +5,27 @@ public class EventErrorMsgs {
 	private String errorMsg;
 	private String duplicateResMsg;
 	private String invalidCCNum;
-	private String invalidCVVNum;
+	private String invalidpin;
 	private String invalidExpDate;
 	private String timeerror;
 	private String capacityError;
 	private String staffError;
+	private String eventNameError;
+	private String pastdateError;
+	private String durationError;
 	
 	public EventErrorMsgs () {
 		this.errorMsg="";
 		this.duplicateResMsg="";
 		this.invalidCCNum="";
-		this.invalidCVVNum="";
+		this.invalidpin="";
 		this.invalidExpDate = "";
 		this.timeerror = "";
 		this.setCapacityError("");
 		this.setStaffError("");
+		this.eventNameError = "";
+		this.pastdateError = "";
+		this.durationError = "";
 	}
 	
 	public String getErrorMsg() {
@@ -28,10 +34,14 @@ public class EventErrorMsgs {
 	public void setErrorMsg() {
 		if (!duplicateResMsg.equals("")
 				||!invalidCCNum.equals("")
-				||!invalidCVVNum.equals("")
+				||!invalidpin.equals("")
 				||!invalidExpDate.equals("")
 				||!timeerror.equals("")
-				||!staffError.equals(""))
+				||!staffError.equals("")
+				||!eventNameError.equals("")
+				||!pastdateError.equals("")
+				||!durationError.equals("")
+				||!capacityError.equals("") )
 		  errorMsg="Please correct the following errors";
 	}
 	
@@ -51,16 +61,16 @@ public class EventErrorMsgs {
 		this.invalidCCNum = invalidCCNum;
 	}
 	
-	public String getinvalidCVVNum() {
-		return invalidCCNum;
+	public String getinvalidpin() {
+		return invalidpin;
 	}
 
-	public void setinvalidCVVNum(String invalidCVVNum) {
-		this.invalidCVVNum = invalidCVVNum;
+	public void setinvalidpin(String invalidpin) {
+		this.invalidpin = invalidpin;
 	}
 	
 	public String getinvalidExpDate() {
-		return invalidCCNum;
+		return invalidExpDate;
 	}
 
 	public void setinvalidExpDate(String invalidExpDate) {
@@ -89,6 +99,30 @@ public class EventErrorMsgs {
 
 	public void setStaffError(String staffError) {
 		this.staffError = staffError;
+	}
+
+	public String getEventNameError() {
+		return eventNameError;
+	}
+
+	public void setEventNameError(String eventNameError) {
+		this.eventNameError = eventNameError;
+	}
+
+	public String getPastdateError() {
+		return pastdateError;
+	}
+
+	public void setPastdateError(String pastdateError) {
+		this.pastdateError = pastdateError;
+	}
+
+	public String getDurationError() {
+		return durationError;
+	}
+
+	public void setDurationError(String durationError) {
+		this.durationError = durationError;
 	}
 	
 

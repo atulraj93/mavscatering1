@@ -20,13 +20,13 @@
     
     <tr>
     <td> First Name (*): </td>
-    <td> <input name="firstname" type="text" maxlength="16">  </td>
-  	<td> <input name="firstNameError"  value="<c:out value='${errorMsgs.staffError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
+    <td> <input name="firstname" type="text">  </td>
+  	<td> <input name="firstNameError"  value="<c:out value='${errorMsgs.staffError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" > </td>
     </tr>
     
     <tr>
     <td> Last Name (*): </td>
-    <td> <input name="lastname" type="text" maxlength="16">  </td>
+    <td> <input name="lastname" type="text" >  </td>
     </tr>
   
     </table>

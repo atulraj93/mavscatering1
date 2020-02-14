@@ -6,10 +6,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<p>Welcome <c:out value="${DepositValue}" /></p>
+
 
 </head>
 <body>
+<p>Deposit Amount is : <c:out value="${DepositValue}" /></p>
 <a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
   <form action="/mav_catering/eventController?action=PayDeposit" method="post">          
        <table border="1" class="myTable"> 
@@ -88,17 +89,17 @@
  <tr>
 	<td> Card Number : </td>
 	<td><input type="text" id="idccNum" name="idccNum"></td>
-	<td style="padding:0px"><input name="invalidCCNum"  value="<c:out value='${CardErrors.invalidCCNum}'/>" type="text"  style ="border: none;margin-left:100;width:auto"></td>	        
+	<td style="padding:0px"><input name="invalidCCNum"  value="<c:out value='${CardErrors.invalidCCNum}'/>" type="text"  style ="border: none;width:800px"></td>	        
 </tr>
 <tr>
 	<td> Security Code : </td>
-	<td><input type="text" id="idcvvNum" name="idcvvNum"></td>
-	<td style="padding:0px"><input name="invalidCVVNum"  value="<c:out value='${CardErrors.invalidCVVNum}'/>" type="text"  style ="border: none;margin-left:100;width:auto"></td>	        
+	<td><input type="text" id="idinvalidpin" name="idinvalidpin"></td>
+	<td style="padding:0px"><input name="invalidpin"  value="<c:out value='${CardErrors.invalidpin}'/>" type="text"  style ="border: none;width:800px"></td>	        
 </tr>
 <tr>
 	<td> Exp Date : </td>
 	<td><input type="date" id="idexpDate" name="idexpDate"></td>
-	<td style="padding:0px"><input name="invalidExpDate"  value="<c:out value='${CardErrors.invalidExpDate}'/>" type="text"  style =" border: none;margin-left:100;width:auto"></td>		        
+	<td style="padding:0px"><input name="invalidExpDate"  value="<c:out value='${CardErrors.invalidExpDate}'/>" type="text"  style =" border: none;width:800px"></td>		        
 </tr>
    
     </table>

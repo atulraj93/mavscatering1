@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 //import java.text.SimpleDateFormat;
 //import java.util.Calendar;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+//import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import data.EventDAO;
 import model.Event;
@@ -40,13 +43,14 @@ public class eventController extends HttpServlet {
 		HttpSession session = request.getSession();
         String action = request.getParameter("action"), url ="";
         String EventID = request.getParameter("eventID");
-		if(action.equalsIgnoreCase("viewSepcificEvent"))
+		if(action.equalsIgnoreCase("viewSpecificEvent"))
         {
         	System.out.println(EventID);
+        	
         	Event event = new Event();
-        	event = EventDAO.getSpecificEvent(EventID);
-            session.setAttribute("REGISTEREVENT", event);
-            url  ="/PayDeposit.jsp";
+        	event = EventDAO.getSpecificEvent(request.getParameter("id"));
+        	session.setAttribute("eventsummary", event);
+            url  ="/viewevent.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
 		else
@@ -80,6 +84,8 @@ public class eventController extends HttpServlet {
 			//double EntertainmentCost = 0;
 			double FinalDepositCost = 0;
 			String estAttendees = request.getParameter("estAttendees");
+			if(!estAttendees.isEmpty()) {
+				
 			
 			
 			/*Food meal type: breakfast, lunch, supper. Meal cost: breakfast $8/person attending, 
@@ -109,7 +115,7 @@ public class eventController extends HttpServlet {
 			else {
 				FinalDepositCost = FoodMealCost + MealFormalityCost + DrinkCost;
 			}
-			
+			}
 			session.setAttribute("DepositValue", FinalDepositCost);
 			
 			event.setEvent(session.getAttribute("fname").toString(),session.getAttribute("lname").toString()
@@ -123,7 +129,11 @@ public class eventController extends HttpServlet {
 			
 			session.setAttribute("EVENT",event);
 			event.validateEvent(event, EerrorMsgs);
+			event.validateduration(session.getAttribute("date").toString(),
+					session.getAttribute("time").toString(),
+					request.getParameter("duration"),EerrorMsgs);
 			session.setAttribute("errorMsgs",EerrorMsgs);
+			session.setAttribute("EVENT", event);
 			if (EerrorMsgs.getErrorMsg().equals("")) {
 				EventDAO.registerEvent(event);
 				session.removeAttribute("errorMsgs");
@@ -136,12 +146,17 @@ public class eventController extends HttpServlet {
         	//Event event1 = new Event();	
         	event = (Event) session.getAttribute("EVENT");
         	String ccnumber = request.getParameter("idccNum");
-        	String ccseccode = request.getParameter("idcvvNum");
+        	String ccseccode = request.getParameter("idinvalidpin");
         	String expdate = request.getParameter("idexpDate");
         	event.setccnumber(ccnumber);
-        	event.setccsecuritycode(ccseccode);
+        	event.setccpin(ccseccode);
         	event.setccexpdate(expdate);
-        	event.validateCardinfo(event, CarderrorMsgs);
+			try {
+				event.validateCardinfo(event, CarderrorMsgs);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         	session.setAttribute("CardErrors", CarderrorMsgs);
         	//String depositAmount = session.getAttribute("DepositValue").toString();
         	if (CarderrorMsgs.getErrorMsg().equals("")) 
@@ -165,11 +180,15 @@ public class eventController extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("goassignStaff")) {
 			url="/assignstaff.jsp";
+			String temp = request.getParameter("id");
+			System.out.println(temp);
 			session.setAttribute("eid", request.getParameter("id"));
 		}
 		else if(action.equalsIgnoreCase("assignStaff")) {
 			System.out.print("In assign staff");
 			event.seteventID((String)session.getAttribute("eid"));
+			String id = session.getAttribute("eid").toString();
+			System.out.println(id);
 			EventErrorMsgs EerrorMsgs = new EventErrorMsgs();
 			session.setAttribute("errorMsgs", EerrorMsgs);
 			EerrorMsgs.setStaffError(User.validateStaff(request.getParameter("firstname"), request.getParameter("lastname")));

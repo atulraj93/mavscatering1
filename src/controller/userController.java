@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 //import java.util.Enumeration;
 
@@ -58,6 +61,16 @@ public class userController extends HttpServlet {
 									userDB.get(0).getZipcode());
 			session.setAttribute("USER", selectedUser);
 			getServletContext().getRequestDispatcher("/modifyUserProfile.jsp").forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("EventRequest")) {
+			 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");  
+			  LocalDateTime now = LocalDateTime.now();  
+			   
+			session.setAttribute("CurrentTime", dtf.format(now));
+			session.setAttribute("CurrentDate", java.time.LocalDate.now());
+			//2020-02-12
+			//url = "/EventRequest.jsp";
+			getServletContext().getRequestDispatcher("/EventRequest.jsp").forward(request, response);
 		}
 		else // redirect all other gets to post
 			doPost(request,response);
@@ -162,6 +175,12 @@ public class userController extends HttpServlet {
 				String selectedTime = request.getParameter("idtime");
 				EventErrorMsgs EerrorMsgs = new EventErrorMsgs();
 				event.validateSelectedDateTime(selectedDate, selectedTime, EerrorMsgs);
+					try {
+						event.validateselectedDate(selectedDate, EerrorMsgs);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				session.setAttribute("TIMEERROR", EerrorMsgs);
 				if (EerrorMsgs.getErrorMsg().equals("")) {
 					session.removeAttribute("errorMsgs");

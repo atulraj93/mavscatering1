@@ -10,81 +10,57 @@
 <title>Selected Event  </title>
 </head>
 <body>
-    <sql:setDataSource
-        var="myDS"
-        driver="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/mavs_catering"
-        user="root" password="hitesh1312"
-    />
-     
-    <sql:query var="eventsummary"   dataSource="${myDS}">
-        SELECT event_ID,lastname,firstname,date,starttime,duration,hallname,est_attendees,eventname
-        foodtype,meal,meal_formality,drink_type,ent_items,eventstatus,assign_staff_lname,assign_staff_fname FROM eventsummary;
-    </sql:query>
      
     <div align="center">
         <table border="1" cellpadding="5">
             <caption><h2>Event summary</h2></caption>
            
-            <c:forEach var="eventsummary" items="${eventsummary.rows}">
                     <tr><td>Event ID:</td>            
-                    <td><c:out value="${eventsummary.event_ID}" /></td></tr>
+                    <td><c:out value="${eventsummary.eventID}" /></td></tr>
             		
             		<tr><td>Last Name Name:</td>                    
-                    <td><c:out value="${eventsummary.lastname}" /></td></tr>
+                    <td><c:out value="${eventsummary.lastName}" /></td></tr>
                     
                     <tr><td>Fist Name:</td>                    
-                    <td><c:out value="${eventsummary.firstname}" /></td></tr>
+                    <td><c:out value="${eventsummary.firstName}" /></td></tr>
                     
                     <tr><td>Event Date:</td>                    
                     <td><c:out value="${eventsummary.date}" /></td></tr>
                     
                     <tr><td>Start time:</td>                    
-                    <td><c:out value="${eventsummary.starttime}" /></td></tr>
+                    <td><c:out value="${eventsummary.startTime}" /></td></tr>
                     
                     <tr><td>Duration:</td>                    
                     <td><c:out value="${eventsummary.duration}" /></td></tr>                    
                     
                     <tr><td>Hallname:</td>                    
-                    <td><c:out value="${eventsummary.hallname}" /></td></tr>
+                    <td><c:out value="${eventsummary.hallName}" /></td></tr>
                     
                     
                     <tr><td>Estimated Attendees:</td>
-                    <td><c:out value="${eventsummary.est_attendees}" /></td></tr>                    
+                    <td><c:out value="${eventsummary.estAttendees}" /></td></tr>                    
                     
                     
                     <tr><td>Event Name:</td>                    
-                    <td><c:out value="${eventsummary.eventname}" /></td></tr>
+                    <td><c:out value="${eventsummary.eventName}" /></td></tr>
                     
                     <tr><td>Food Type:</td>                    
-                    <td><c:out value="${eventsummary.food_type}" /></td></tr>                    
+                    <td><c:out value="${eventsummary.foodType}" /></td></tr>                    
                     
                     <tr><td>Meal:</td>                    
                     <td><c:out value="${eventsummary.meal}" /></td></tr>
                     
                     
                     <tr><td>Meal Formality:</td>                    
-                    <td><c:out value="${eventsummary.meal_formality}" /></td></tr>                    
+                    <td><c:out value="${eventsummary.mealFormality}" /></td></tr>                    
                     
                     <tr><td>Drink Type:</td>                    
-                    <td><c:out value="${eventsummary.drink_type}" /></td></tr>
+                    <td><c:out value="${eventsummary.drinkType}" /></td></tr>
                     
                     
                     <tr><td>Entertainment Items:</td>
-                    <td><c:out value="${eventsummary.ent_items}" /></td></tr>                    
+                    <td><c:out value="${eventsummary.entertainmentItems}" /></td></tr>                    
                     
-                    
-                    <tr><td>Event Status:</td>                    
-                    <td><c:out value="${eventsummary.eventstatus}" /></td></tr>
-                    
-                    <tr><td>Assigned Staff Lastname:</td>                    
-                    <td><c:out value="${eventsummary.assign_staff_lname}" /></td></tr>                    
-                    
-                    <tr><td>Assigned Staff Firstname::</td>                    
-                    <td><c:out value="${eventsummary.assign_staff_fname}" /></td></tr>
-                                        
-                    
-            </c:forEach>
         </table>
           	<td><a href="assignstaff.jsp">assign staff</a></td>
         

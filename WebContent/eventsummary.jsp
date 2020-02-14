@@ -19,12 +19,12 @@
 				<th class="myTable35">Event ID</th> 
 				<th class="myTable20">Event Name</th>
 				<th class="myTable30">Duration</th> 
-				<th class="myTable35">first name</th> 
+				<th class="myTable35">First Name</th> 
 				<th class="myTable20">Last Name</th>
 				<th class="myTable30">Starttime</th> 
-				<th class="myTable30">VIew</th> 
-				<th class="myTable30">Assign Staff</th> 
-				<th class="myTable30">Modify Event</th> 
+				<th class="myTable30">Hall Name</th> 
+				<th class="myTable30">Event Date</th> 
+				<th class="myTable30">Est Atendees</th> 
 				
 				
 			</tr>
@@ -37,7 +37,10 @@
 			<td class="myTable30 "><c:out value="${item.firstName}" /></td>
 			<td class="myTable20 "><c:out value="${item.lastName}" /></td>
 			<td class="myTable30 "><c:out value="${item.startTime}" /></td>
-            <td> <a href="<c:url value='/eventController?action=viewevent&id=${item.eventID}' />">View</a></td>
+			<td class="myTable30 "><c:out value="${item.hallName}" /></td>
+			<td class="myTable30 "><c:out value="${item.date}" /></td>
+			<td class="myTable30 "><c:out value="${item.estAttendees}" /></td>
+            <td> <a href="<c:url value='/eventController?action=viewSpecificEvent&id=${item.eventID}' />">View</a></td>
             <td> <a href="<c:url value='/eventController?action=goassignStaff&id=${item.eventID}' />"> Assign </a></td>
             <td> <a href="<c:url value='/eventController?action=Modifyevent&id=${item.eventID}' />">Modify</a></td>
 			
