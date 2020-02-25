@@ -142,7 +142,8 @@ public class userController extends HttpServlet {
 			}
 			else {
 				UserDAO.modifyUser(user.getUsername(), user.getRole());
-				url="/userController?action=refreshPage&id="+user.getLastname();			}
+				url="/userController?action=refreshPage&id="+user.getLastname();			
+			}
 		}
 		else if(action.equalsIgnoreCase("refreshPage")) {
 			String lastname = request.getParameter("id");
@@ -201,6 +202,12 @@ public class userController extends HttpServlet {
 				
 				}
 			}
+		else if(action.equalsIgnoreCase("deleteSpecificUser")) {
+			String username = request.getParameter("id");
+			String lastname = request.getParameter("id1");
+			UserDAO.deleteUser(username);
+			url="/userController?action=refreshPage&id="+lastname;
+		}
 
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);

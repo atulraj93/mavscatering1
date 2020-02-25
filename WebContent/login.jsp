@@ -31,7 +31,7 @@
     <input name="loginBtn" type="submit" value="Login">
 	<table>
 	<tr>
-	<td>New User ? <a href="register.jsp"><span>Register</span></a></td>
+	<td>New User ? <a href="<c:url value='/register.jsp' />"><span>Register</span></a></td>
 	</tr>
 	</table>  
     </form>
