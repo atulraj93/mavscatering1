@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +8,6 @@
 <body>
 	<a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
 	No Events are available at the selected date and time, please try again.
-	<a href="EventRequest.jsp" target="_top" style="margin-left: 118px;"> Return to select event </a>
+	<a href="<c:url value='/EventRequest.jsp' />" target="_top" style="margin-left: 118px;"> Return to select event </a>
 </body>
 </html>

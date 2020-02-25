@@ -155,17 +155,28 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 	
 	public static void deleteUser(String username) {
 
-		String sql = "delete from mavs_catering.user where username = 'bxs5834';";
-		Statement stmt = null;
+		String sql = "delete from mavs_catering.user where username = '"+username+"';";
+		PreparedStatement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
 		try { 
-		      stmt = conn.createStatement();
+			  conn.setAutoCommit(false);
+			  stmt = conn.prepareStatement(sql);
 		      
 		      stmt.executeUpdate(sql);
+		      conn.commit();	
 		      System.out.println("Record deleted successfully");
 		    } catch (SQLException e) {
 		      e.printStackTrace();
 		    }
+		finally {
+			try {
+				conn.close();
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			};
+		}
+
 	}
 	
 	public static ArrayList<String> checkRoles() {
@@ -207,11 +218,8 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 		try {
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sqlUpdate);
-			//pstmt.setString(1, role);
-			//pstmt.setString(2, username);
 			pstmt.executeUpdate(sqlUpdate);
 			conn.commit();	
-			//pstmt.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -225,7 +233,6 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 		}
 		
 	}
-	
 	
 	public static boolean getStaff(String fname,String lname){
 		boolean staff = false;

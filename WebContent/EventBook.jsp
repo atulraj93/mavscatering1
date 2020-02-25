@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +16,13 @@
     
     <tr>
     <td> Last Name: </td>
-    <td> <input name="lastName" value="<c:out value='${lname}'/>" type="text" maxlength="50" disabled="disabled"> </td>
-  	<td> <input name="duplicateResMsg"  value="<c:out value='${errorMsgs.duplicateResMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
+    <td> <input name="lastName" value="<c:out value='${lname}'/>" type="text" disabled="disabled"> </td>
+  	<td> <input name="duplicateResMsg"  value="<c:out value='${errorMsgs.duplicateResMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" > </td>
     </tr>
     
 	<tr>
     <td> First Name: </td>
-    <td> <input name="firstName" value="<c:out value='${fname}'/>" type="text" maxlength="50" disabled="disabled"> </td>
+    <td> <input name="firstName" value="<c:out value='${fname}'/>" type="text" disabled="disabled"> </td>
     </tr>
     
     <tr>
@@ -53,7 +51,7 @@
       <option id="7" value="7">7</option>
       <option id="8" value="8">8</option>
     </select>
-    <td> <input name="durationmsg"  value="<c:out value='${errorMsgs.durationError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
+    <td> <input name="durationmsg"  value="<c:out value='${errorMsgs.durationError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" > </td>
    	</tr>
     
     <tr>
@@ -69,14 +67,14 @@
    	
    	<tr>
     <td> Estimated Attendees: </td>
-    <td> <input name="estAttendees" value="<c:out value='${Event.estAttendees}'/>" type="text" maxlength="16">  </td>
+    <td> <input name="estAttendees" value="<c:out value='${Event.estAttendees}'/>" type="text">  </td>
     <td> <input name="capacityError"  value="<c:out value='${errorMsgs.capacityError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled"> </td>
   
     </tr>
    	
    	<tr>
     <td> Event Name: </td>
-    <td> <input name="eventName" value="<c:out value='${Event.eventName}'/>" type="text" maxlength="10">  </td>
+    <td> <input name="eventName" value="<c:out value='${Event.eventName}'/>" type="text">  </td>
     <td> <input name="eventNameError"  value="<c:out value='${errorMsgs.eventNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled"> </td>
     </tr>
     

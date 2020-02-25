@@ -63,7 +63,7 @@ public class Event implements Serializable{
 	
 	public void updateEvent(String lastName,String firstName, String date,String startTime,String duration,String hallName,String estAttendees,
 			String eventName, String foodType,String meal, String mealFormality, String drinkType, String entertainmentItems,String eventStatus,String eventID,
-			String ccnumber,String ccpin, String ccexpdate, String userid, String depsoitAmount) 
+			String ccnumber,String ccpin, String ccexpdate, String userid, String depsoitAmount, String depositAmount) 
 	{	
 		this.lastName = lastName;
 		this.firstName = firstName;
