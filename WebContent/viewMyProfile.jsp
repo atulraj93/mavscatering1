@@ -16,8 +16,6 @@
     <form name="registrationForm" action="<c:url value='/userController?action=modifyUserProfile' />" method="post">
     <table style="width: 1200px; ">
 
-    
-
     <tr>
     <td> Username (*): </td>
     <td> <input name="username" value="<c:out value='${USER.username}'/>" type="text" >  </td>
