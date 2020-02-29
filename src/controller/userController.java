@@ -156,6 +156,7 @@ public class userController extends HttpServlet {
 				url="/modifyUserProfile.jsp";
 			}
 			else {
+<<<<<<< HEAD
 				if(user1.getUsername().equals(user.getUsername())) {
 					UserDAO.modifyUserProfile(user);
 					url="/adminHomePage.jsp";			
@@ -164,6 +165,10 @@ public class userController extends HttpServlet {
 					UserDAO.modifyUserProfile(user);
 					url="/userController?action=refreshPage&id="+user.getLastname();			
 				}
+=======
+				UserDAO.modifyUser(user.getUsername(), user.getRole());
+				url="/userController?action=refreshPage&id="+user.getLastname();			
+>>>>>>> 2301f54e9f51d1a6e536b91f5c3d4a3c8b932501
 			}
 		}
 		else if(action.equalsIgnoreCase("refreshPage")) {

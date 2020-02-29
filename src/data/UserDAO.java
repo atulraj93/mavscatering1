@@ -233,6 +233,7 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 		}
 		
 	}
+<<<<<<< HEAD
 
 	public static void modifyUserProfile(User user) {
 		Connection conn = SQLConnection.getDBConnection();  
@@ -266,6 +267,8 @@ static SQLConnection DBMgr = SQLConnection.getInstance();
 		}
 		
 	}
+=======
+>>>>>>> 2301f54e9f51d1a6e536b91f5c3d4a3c8b932501
 	
 	public static boolean getStaff(String fname,String lname){
 		boolean staff = false;
