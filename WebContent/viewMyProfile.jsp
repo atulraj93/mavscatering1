@@ -24,12 +24,6 @@
     </tr>
     
     <tr>
-    <td> Password (*): </td>
-    <td> <input name="password" type="password" value="<c:out value='${USER.password}'/>" type="text" >  </td>
-  	<td> <input name="passwordError"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" > </td>
-    </tr>
-    
-    <tr>
     <td> Role: (*): </td>
     <td> <input name="role" value="<c:out value='${USER.role}'/>" type="text" >  </td>
   	<td> <input name="roleError"  value="<c:out value='${errorMsgs.roleError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" > </td>
@@ -37,7 +31,7 @@
     
    	<tr>
     <td> UTA ID (*): </td>
-    <td> <input name="utaid" value="<c:out value='${USER.utaid}'/>" type="text" >  </td>
+    <td> <input name="utaid" value="<c:out value='${USER.utaid}'/>" type="text"  disabled>  </td>
   	<td> <input name="utaIdError"  value="<c:out value='${errorMsgs.utaIdError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" > </td>
     </tr>
     

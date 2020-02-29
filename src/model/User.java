@@ -148,7 +148,6 @@ public class User implements Serializable{
 			errorMsgs.setLastNameError(validateLastname(user.getLastname()));
 		}
 		else if(action.equals("registerUser")) {
-			//System.out.println(user.getRole());
 			errorMsgs.setFirstNameError(validateFirstname(user.getFirstname()));
 			errorMsgs.setLastNameError(validateLastname(user.getLastname()));
 			errorMsgs.setUtaIdError(validateutaid(user.getUtaid()));
@@ -164,7 +163,29 @@ public class User implements Serializable{
 			errorMsgs.setEmailError(validateEmail(user.getEmail()));
 		}
 		else if(action.equals("modifyUserProfile")) {
+			errorMsgs.setFirstNameError(validateFirstname(user.getFirstname()));
+			errorMsgs.setLastNameError(validateLastname(user.getLastname()));
+			errorMsgs.setUsernameError(validateusername(user.getUsername()));
+			errorMsgs.setPhoneError(validatePhone(user.getPhone()));
+			errorMsgs.setStreetNumberError(validateStreetnumber(user.getStreetnumber()));
+			errorMsgs.setStreetNameError(validateStreetname(user.getStreetname()));
+			errorMsgs.setZipcodeError(validatezipcode(user.getZipcode()));
+			errorMsgs.setCityError(validatecity(user.getCity()));
+			errorMsgs.setStateError(validatestate(user.getState()));
+			errorMsgs.setEmailError(validateEmail(user.getEmail()));
+		}
+		else if(action.equals("userProfile")) {
+			errorMsgs.setFirstNameError(validateFirstname(user.getFirstname()));
+			errorMsgs.setLastNameError(validateLastname(user.getLastname()));
+			errorMsgs.setUsernameError(validateusername(user.getUsername()));
+			errorMsgs.setPhoneError(validatePhone(user.getPhone()));
+			errorMsgs.setStreetNumberError(validateStreetnumber(user.getStreetnumber()));
+			errorMsgs.setStreetNameError(validateStreetname(user.getStreetname()));
+			errorMsgs.setZipcodeError(validatezipcode(user.getZipcode()));
+			errorMsgs.setCityError(validatecity(user.getCity()));
+			errorMsgs.setStateError(validatestate(user.getState()));
 			errorMsgs.setRoleError(validateRole(user.getRole()));
+			errorMsgs.setEmailError(validateEmail(user.getEmail()));
 		}
 		else if(action.equals("login")) {
 			errorMsgs.setUsernameError(validateusername(user.getUsername()));
