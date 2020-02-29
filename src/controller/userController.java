@@ -131,18 +131,44 @@ public class userController extends HttpServlet {
 			
 			session.setAttribute("USER", user);
 			getUserParam(request,user);
-			
-			user.validateUser(action,user,uerrorMsgs);
+			User user1 = (User)session.getAttribute("currentUser");
+			User userProfile = UserDAO.getUser(user1.getUsername());
+			System.out.println("Usenrmae: "+user1.getUsername()+" "+user.getUsername());
+			if(user1.getUsername().equals(user.getUsername())) {
+				System.out.println("In admin0:");
+				if(userProfile.getRole().equals("Admin") || userProfile.getRole().equals("Caterer Manager")){
+					System.out.println("In admin:");
+					user.validateUser("modifyUserProfile",user,uerrorMsgs);
+				}
+				else {
+					user.validateUser("userProfile",user,uerrorMsgs);
+					System.out.println("In register:");
+				}
+			}
+			else {
+				user.validateUser("userProfile",user,uerrorMsgs);
+				System.out.println("In register:");
+			}
 			uerrorMsgs.setErrorMsgs();
-			
 			if (!uerrorMsgs.getErrorMsgs().equals("")) {// if error messages
 				getUserParam(request,user);
 				session.setAttribute("errorMsgs", uerrorMsgs);
 				url="/modifyUserProfile.jsp";
 			}
 			else {
+<<<<<<< HEAD
+				if(user1.getUsername().equals(user.getUsername())) {
+					UserDAO.modifyUserProfile(user);
+					url="/adminHomePage.jsp";			
+				}
+				else {
+					UserDAO.modifyUserProfile(user);
+					url="/userController?action=refreshPage&id="+user.getLastname();			
+				}
+=======
 				UserDAO.modifyUser(user.getUsername(), user.getRole());
 				url="/userController?action=refreshPage&id="+user.getLastname();			
+>>>>>>> 2301f54e9f51d1a6e536b91f5c3d4a3c8b932501
 			}
 		}
 		else if(action.equalsIgnoreCase("refreshPage")) {
@@ -156,7 +182,6 @@ public class userController extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("viewProfile")) {
 			User user1 = (User)session.getAttribute("currentUser");
-			System.out.println("Current User : "+user1.getUsername());
 			User userProfile = UserDAO.getUser(user1.getUsername());
 			session.setAttribute("USER", userProfile);
 			url="/viewMyProfile.jsp";
