@@ -10,7 +10,7 @@
 <nav>
   <ul>
     <li><a href="<c:url value='/' />">Home</a></li>
-    
+    <li><a href="<c:url value='/userController?action=viewProfile' />"><span>View/Modify My Profile</span></a></li>
   </ul>
 </nav>
 <a href="<c:url value='/userController?action=logout' />"><span>Logout</span></a>
